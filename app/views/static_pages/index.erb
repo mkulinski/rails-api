@@ -18,8 +18,15 @@
     $('#new-form').submit(function(event) {
       event.preventDefault();
       var textbox = $('.new-todo');
-      console.log(textbox.val());
-    })
+      var payload = {
+        task: {
+          title: textbox.val()
+        }
+      };
+      $.post("/tasks", payload).success(function(data) {
+        console.log("successful HTTP Request");
+      });
+    });
 
     //grabs a task from the database and adds to in html to the page
     function taskHTML(task) {
