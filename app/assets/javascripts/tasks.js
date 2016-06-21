@@ -3,7 +3,9 @@ $(function() {
   //grabs a task from the database and adds to in html to the page
   function taskHTML(task) {
     var checkedStatus = task.done ? "checked" : "";
-    var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' +
+    var liClass = task.done ? "completed" : "";
+    var liElement = '<li id="listItem-' + task.id +'" class = "' + liClass + '">' + 
+    	'<div class="view"><input class="toggle" type="checkbox"' +
       " data-id='" + task.id + "'" +
       checkedStatus +
       '><label>' +
@@ -24,6 +26,11 @@ $(function() {
       task: {
         done: doneValue
       }
+    }).success(function(data) {
+    	var LiHtml = taskHTML(data);
+    	var $li = $("#listItem-" + data.id);
+    	$li.replaceWith(LiHtml);
+    	$('.toggle').change(toggleTask);
     });
   }
 
