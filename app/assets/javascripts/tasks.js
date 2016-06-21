@@ -56,6 +56,7 @@ $(function() {
       ulTodos.append(htmlString);
       $('.toggle').click(toggleTask);
     });
+    textbox.val(''); 
   });
 
 });
